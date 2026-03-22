@@ -10,6 +10,16 @@ export default function Index() {
   const [selected, setSelected] = useState<number | null>(500);
   const [custom, setCustom] = useState("");
   const [activeSection, setActiveSection] = useState<"birds" | "animals">("birds");
+  const [showCard, setShowCard] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const CARD_NUMBER = "2202 2088 1738 2048";
+
+  const copyCard = () => {
+    navigator.clipboard.writeText(CARD_NUMBER.replace(/\s/g, ""));
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -281,12 +291,61 @@ export default function Index() {
             </div>
 
             <button
+              onClick={() => setShowCard(true)}
               className="w-full py-4 rounded-2xl font-golos font-semibold text-base transition-all hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2"
               style={{ background: "hsl(16 55% 42%)", color: "hsl(38 30% 97%)" }}
             >
               <Icon name="Heart" size={18} fallback="Heart" />
               Пожертвовать{donateAmount ? ` ${donateAmount.toLocaleString()} ₽` : ""}
             </button>
+
+            {/* Card modal */}
+            {showCard && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center px-4"
+                style={{ background: "hsla(25,25%,12%,0.6)", backdropFilter: "blur(6px)" }}
+                onClick={() => setShowCard(false)}
+              >
+                <div
+                  className="w-full max-w-sm rounded-3xl p-8 shadow-2xl animate-fade-in-up"
+                  style={{ background: "hsl(38 30% 97%)" }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="font-cormorant text-2xl font-semibold" style={{ color: "hsl(25 25% 18%)" }}>Реквизиты для перевода</h3>
+                    <button onClick={() => setShowCard(false)} className="hover:opacity-60 transition-opacity">
+                      <Icon name="X" size={20} fallback="X" style={{ color: "hsl(25 15% 45%)" }} />
+                    </button>
+                  </div>
+
+                  <p className="font-golos text-sm mb-5" style={{ color: "hsl(25 15% 45%)" }}>
+                    Переведите любую сумму на карту Сбербанка и сообщите нам — мы пришлём отчёт о том, как были использованы средства.
+                  </p>
+
+                  <div className="rounded-2xl p-5 mb-4" style={{ background: "hsl(38 20% 90%)" }}>
+                    <div className="font-golos text-xs mb-2" style={{ color: "hsl(25 15% 55%)" }}>Номер карты Сбербанк</div>
+                    <div className="font-cormorant text-3xl font-semibold tracking-widest" style={{ color: "hsl(25 25% 18%)" }}>
+                      {CARD_NUMBER}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={copyCard}
+                    className="w-full py-3.5 rounded-2xl font-golos font-medium text-sm transition-all hover:scale-105 flex items-center justify-center gap-2"
+                    style={copied
+                      ? { background: "hsl(78 22% 40%)", color: "hsl(38 30% 97%)" }
+                      : { background: "hsl(16 55% 42%)", color: "hsl(38 30% 97%)" }}
+                  >
+                    <Icon name={copied ? "Check" : "Copy"} size={16} fallback="Copy" />
+                    {copied ? "Скопировано!" : "Скопировать номер карты"}
+                  </button>
+
+                  <p className="font-golos text-xs text-center mt-4" style={{ color: "hsl(25 15% 60%)" }}>
+                    Нажмите за пределами окна, чтобы закрыть
+                  </p>
+                </div>
+              </div>
+            )}
 
             <p className="font-golos text-xs text-center mt-4" style={{ color: "hsl(25 15% 60%)" }}>
               Безопасная оплата · Мы не храним данные карты · Можно отменить
