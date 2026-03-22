@@ -210,6 +210,49 @@ export default function Index() {
         </div>
       </section>
 
+      {/* STORIES */}
+      <section className="py-24 px-6" style={{ background: "hsl(38 25% 93%)" }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="font-golos text-sm tracking-widest uppercase" style={{ color: "hsl(78 22% 40%)" }}>Наши подопечные</span>
+            <h2 className="font-cormorant text-5xl md:text-6xl font-semibold mt-3" style={{ color: "hsl(25 25% 18%)" }}>
+              Спасённые и вылеченные
+            </h2>
+            <div className="w-16 h-1 rounded-full mx-auto mt-5" style={{ background: "hsl(16 55% 42%)" }} />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              { url: "https://cdn.poehali.dev/projects/2e42e12a-9361-4b13-ab7b-e7ca07957ae6/bucket/b9917a7d-8fb1-4db9-bbe8-9bea687820b9.jpg" },
+              { url: "https://cdn.poehali.dev/projects/2e42e12a-9361-4b13-ab7b-e7ca07957ae6/bucket/50d621f0-21ee-4c6f-b2db-b7bf92dd2ff7.jpg" },
+            ].map((photo, i) => (
+              <div key={i} className="relative overflow-hidden rounded-3xl shadow-lg group">
+                <img
+                  src={photo.url}
+                  alt="Спасённые уточки"
+                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  style={{ height: 420 }}
+                />
+                <div
+                  className="absolute inset-0 flex items-end p-6"
+                  style={{ background: "linear-gradient(to top, hsla(25,25%,12%,0.65) 0%, transparent 60%)" }}
+                >
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mb-3"
+                         style={{ background: "hsl(16 55% 42%)" }}>
+                      <span className="font-golos text-xs font-medium" style={{ color: "hsl(38 30% 97%)" }}>🦆 Спасены и вылечены</span>
+                    </div>
+                    <p className="font-cormorant text-2xl font-semibold" style={{ color: "hsl(38 30% 97%)" }}>
+                      Уточки нашли безопасный дом
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* DONATE */}
       <section id="donate" className="py-24 px-6" style={{ background: "hsl(38 25% 93%)" }}>
         <div className="max-w-2xl mx-auto">
