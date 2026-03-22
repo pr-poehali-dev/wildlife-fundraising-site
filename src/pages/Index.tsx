@@ -327,7 +327,7 @@ export default function Index() {
                     <div className="font-cormorant text-3xl font-semibold tracking-widest" style={{ color: "hsl(25 25% 18%)" }}>
                       {CARD_NUMBER}
                     </div>
-                    <div className="font-golos text-xs mt-2" style={{ color: "hsl(25 15% 55%)" }}>Получатель: <span style={{ color: "hsl(25 25% 25%)" }}>Альма</span></div>
+                    <div className="font-golos text-xs mt-2" style={{ color: "hsl(25 15% 55%)" }}>Получатель: <span style={{ color: "hsl(25 25% 25%)" }}>Альме</span></div>
                   </div>
 
                   <button
